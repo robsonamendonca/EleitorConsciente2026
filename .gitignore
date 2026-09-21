@@ -1,0 +1,32 @@
+# Ambientes e Segredos
+.env
+.env.backup
+.env.*.local
+
+# Dependências do Composer
+/vendor/
+
+# Cache e testes
+/.phpunit.cache/
+/tests/.phpunit.cache/
+.phpunit.result.cache
+
+# Logs e Armazenamento temporário
+/storage/logs/*.log
+/storage/cache/*
+/storage/imports/*
+
+# Arquivos do Sistema Operacional / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Fotos dos candidatos (arquivos grandes baixados do TSE)
+/database/foto_cand*/
+
+# Symlinks das fotos (criados pelo entrypoint)
+/public/fotos
+/public/fotos_br
+

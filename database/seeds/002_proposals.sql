@@ -1,0 +1,18 @@
+-- ============================================================
+-- Seed 002: Propostas de candidatos
+-- ============================================================
+-- ATENÇÃO: Este arquivo deve ser populado APÓS a importação
+-- de dados reais do TSE.
+--
+-- As propostas abaixo são apenas EXEMPLOS para demonstração
+-- da estrutura do banco. Substitua por dados oficiais quando
+-- disponíveis no DivulgaCandContas ou fontes verificáveis.
+--
+-- Execute após: php importer/cli.php import
+-- ============================================================
+
+-- Nenhuma proposta fictícia deve ser inserida neste arquivo.
+-- As propostas devem ser obtidas de fontes oficiais:
+-- - DivulgaCandContas (https://divulgacandcontas.tse.jus.br/)
+-- - Programas dos partidos (sites oficiais)
+-- - Declarações documentadas dos candidatos

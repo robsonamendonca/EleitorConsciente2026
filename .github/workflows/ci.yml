@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: eleitor_consciente
+          MYSQL_USER: eleitor_user
+          MYSQL_PASSWORD: eleitor_pass
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo, pdo_mysql, mbstring, zip
+          coverage: none
+
+      - name: Validar sintaxe PHP (lint)
+        run: |
+          find src importer routes public tests -type f -name "*.php" -exec php -l {} \;
+
+      - name: Instalar dependências do Composer
+        run: composer install --prefer-dist --no-progress
+
+      - name: Executar Migrações e Seeds no MySQL de CI
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: eleitor_consciente
+          DB_USERNAME: eleitor_user
+          DB_PASSWORD: eleitor_pass
+        run: |
+          php importer/cli.php migrate
+          php importer/cli.php seed
+
+      - name: Executar Testes Automatizados (PHPUnit)
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: eleitor_consciente
+          DB_USERNAME: eleitor_user
+          DB_PASSWORD: eleitor_pass
+        run: ./vendor/bin/phpunit
+
