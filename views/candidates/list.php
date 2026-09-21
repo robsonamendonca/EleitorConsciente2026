@@ -3,9 +3,9 @@ $pageTitle = 'Candidatos - Eleições 2026';
 require __DIR__ . '/../layout/header.php';
 ?>
 
-<div style="margin-bottom: 1.5rem;">
+<div style="margin-bottom: 1.25rem;">
     <h1>Consulta de Candidatos</h1>
-    <p style="color: var(--text-muted);">
+    <p style="color: var(--text-muted); text-transform:uppercase; font-size:0.85rem;">
         Exibindo <?= count($candidates) ?> de <?= (int)$meta['total'] ?> candidatos encontrados.
     </p>
 </div>
@@ -66,9 +66,9 @@ require __DIR__ . '/../layout/header.php';
 </div>
 
 <?php if (empty($candidates)): ?>
-    <div class="card" style="text-align: center; padding: 3rem 1.5rem;">
+    <div class="card" style="text-align: center; padding: 2.5rem 1.5rem;">
         <h3 style="color: var(--text-muted); margin-bottom: 0.5rem;">Nenhum candidato encontrado</h3>
-        <p style="color: var(--text-light); max-width: 500px; margin: 0 auto 1.5rem auto;">
+        <p style="color: var(--text-light); max-width: 500px; margin: 0 auto 1.25rem auto; text-transform:uppercase; font-size:0.85rem;">
             Tente ajustar os filtros de busca ou remover os termos pesquisados.
         </p>
         <a href="/candidatos" class="btn btn-primary">Ver todos os candidatos</a>
@@ -78,8 +78,8 @@ require __DIR__ . '/../layout/header.php';
         <?php foreach ($candidates as $cand): ?>
             <?php
             $isNacional = ($cand['state_code'] === 'BR');
-            $scopeLabel = $isNacional ? '🇧🇷 Nacional' : '📍 Estadual';
-            $scopeColor = $isNacional ? 'var(--primary)' : 'var(--secondary)';
+            $scopeLabel = $isNacional ? '🇧🇷 NACIONAL' : '📍 SP';
+            $scopeColor = $isNacional ? 'var(--btn-teclas)' : 'var(--btn-confirma)';
             ?>
             <div class="candidate-card">
                 <div>
@@ -101,14 +101,15 @@ require __DIR__ . '/../layout/header.php';
                             <strong>Cargo:</strong> <?= $e($cand['office_name']) ?>
                             <span style="
                                 display: inline-block;
-                                margin-left: 0.4rem;
-                                padding: 0.1rem 0.45rem;
-                                border-radius: 999px;
-                                font-size: 0.7rem;
-                                font-weight: 600;
+                                margin-left: 0.3rem;
+                                padding: 1px 6px;
+                                border-radius: 2px;
+                                font-size: 0.65rem;
+                                font-weight: 900;
                                 color: #fff;
                                 background: <?= $scopeColor ?>;
                                 vertical-align: middle;
+                                text-transform: uppercase;
                             "><?= $scopeLabel ?></span>
                         </p>
                         <p><strong>Partido:</strong> <?= $e($cand['party_acronym']) ?><?= !empty($cand['federation_name']) ? ' (' . $e($cand['federation_name']) . ')' : '' ?></p>
@@ -118,13 +119,13 @@ require __DIR__ . '/../layout/header.php';
                                 <?= $e($cand['registration_status']) ?>
                             </span>
                         </p>
-                        <p style="font-size: 0.78rem; color: var(--text-light); margin-top: 0.4rem;">
+                        <p style="font-size: 0.7rem; color: var(--text-light); margin-top: 0.3rem; text-transform:uppercase;">
                             Fonte oficial TSE | Atualizado em: <?= $e(date('d/m/Y', strtotime($cand['source_last_updated_at'] ?? $cand['updated_at']))) ?>
                         </p>
                     </div>
                 </div>
 
-                <div style="display: flex; gap: 0.5rem; margin-top: 1rem; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+                <div style="display: flex; gap: 0.4rem; margin-top: 0.75rem; border-top: 2px solid var(--border-color); padding-top: 0.6rem;">
                     <a href="/candidato/<?= $cand['id'] ?>" class="btn btn-sm btn-secondary" style="flex:1;">Ver Detalhes</a>
                     <button class="btn btn-sm btn-accent btn-add-cola"
                             data-id="<?= $cand['id'] ?>"
@@ -141,7 +142,6 @@ require __DIR__ . '/../layout/header.php';
         <?php endforeach; ?>
     </div>
 
-    <!-- Paginação -->
     <?php if ($meta['total_pages'] > 1): ?>
         <nav class="pagination" aria-label="Paginação de candidatos">
             <?php for ($p = 1; $p <= $meta['total_pages']; $p++): ?>

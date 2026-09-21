@@ -6,15 +6,15 @@ require __DIR__ . '/layout/header.php';
 <section class="hero">
     <h1>Informação eleitoral clara, neutra e auditável para 2026.</h1>
     <p>Consulte dados oficiais do TSE, compare propostas registradas e monte sua cola eleitoral com total privacidade no seu navegador.</p>
-    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="/candidatos?state_code=SP" class="btn btn-accent" style="font-size: 1.05rem; padding: 0.75rem 1.5rem;">Buscar Candidatos de SP</a>
-        <a href="/candidatos?office=PRESIDENTE" class="btn btn-secondary" style="font-size: 1.05rem; padding: 0.75rem 1.5rem;">Ver Presidenciáveis</a>
-        <a href="/cola-eleitoral" class="btn btn-secondary" style="font-size: 1.05rem; padding: 0.75rem 1.5rem;">Acessar Minha Cola</a>
+    <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <a href="/candidatos?state_code=SP" class="btn btn-accent" style="font-size: 0.95rem; padding: 0.65rem 1.25rem;">Buscar Candidatos de SP</a>
+        <a href="/candidatos?office=PRESIDENTE" class="btn btn-secondary" style="font-size: 0.95rem; padding: 0.65rem 1.25rem;">Ver Presidenciáveis</a>
+        <a href="/cola-eleitoral" class="btn btn-secondary" style="font-size: 0.95rem; padding: 0.65rem 1.25rem;">Acessar Minha Cola</a>
     </div>
 </section>
 
-<div class="card" style="margin-bottom: 2rem;">
-    <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">Busca Rápida de Candidatos</h2>
+<div class="card" style="margin-bottom: 1.5rem;">
+    <h2 style="font-size: 1.2rem; margin-bottom: 0.75rem;">Busca Rápida de Candidatos</h2>
     <form action="/candidatos" method="GET" class="filters-form">
         <div class="form-group" style="grid-column: span 2;">
             <label for="search-name">Nome ou número do candidato</label>
@@ -43,13 +43,12 @@ require __DIR__ . '/layout/header.php';
     </form>
 </div>
 
-<section style="margin-bottom: 2.5rem;">
-    <h2>Cargos em Disputa nas Eleições 2026</h2>
-    <p style="color: var(--text-muted); font-size: 0.95rem;">Clique em um cargo para ver todos os candidatos cadastrados no TSE:</p>
+<section style="margin-bottom: 2rem;">
+    <h2 style="font-size: 1.3rem;">Cargos em Disputa nas Eleições 2026</h2>
+    <p style="color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase;">Clique em um cargo para ver todos os candidatos cadastrados no TSE:</p>
     <div class="offices-grid">
         <?php foreach ($offices as $off): ?>
             <?php
-            // Presidente: não filtrar por estado (usa ALL via WebController)
             $isNacional = isset($off['level']) && $off['level'] === 'FEDERAL';
             $officeLink = $isNacional
                 ? '/candidatos?office=' . urlencode($off['code'])
@@ -63,11 +62,11 @@ require __DIR__ . '/layout/header.php';
     </div>
 </section>
 
-<div class="card" style="background-color: #f8fafc; border-left: 4px solid var(--primary);">
+<div class="card" style="background-color: #ffffff; border-left: 6px solid var(--btn-confirma);">
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
         <div>
-            <h3 style="margin-bottom: 0.25rem;">Transparência e Sincronização dos Dados</h3>
-            <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">
+            <h3 style="margin-bottom: 0.2rem; font-size: 1rem;">Transparência e Sincronização dos Dados</h3>
+            <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">
                 Última sincronização com a base oficial: <strong><?= $e($lastUpdate) ?></strong>
             </p>
         </div>
@@ -78,4 +77,3 @@ require __DIR__ . '/layout/header.php';
 </div>
 
 <?php require __DIR__ . '/layout/footer.php'; ?>
-

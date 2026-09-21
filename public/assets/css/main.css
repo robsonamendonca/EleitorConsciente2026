@@ -1,43 +1,49 @@
 /* ==========================================================================
    Eleitor Consciente 2026 - Main Stylesheet
-   Mobile-first, Acessível (WCAG AA/AAA), Neutro e Responsivo
+   Design System: Urna Eletrônica Brasileira
+   Contraste máximo, acessibilidade, estética oficial do Terminal do Eleitor
    ========================================================================== */
 
 :root {
-    --primary: #1e3a8a;
-    --primary-hover: #1e40af;
-    --primary-light: #eff6ff;
-    --secondary: #0f766e;
-    --secondary-hover: #115e59;
-    --accent: #d97706;
+    /* === Paleta Urna Eletrônica === */
+    --bg-page: #FFFFFF;
+    --bg-card: #F4F4F4;
+    --bg-alt: #E8E8E8;
     
-    --bg-page: #f8fafc;
-    --bg-card: #ffffff;
-    --bg-alt: #f1f5f9;
+    --text-main: #000000;
+    --text-muted: #333333;
+    --text-light: #555555;
+    --text-white: #FFFFFF;
     
-    --text-main: #0f172a;
-    --text-muted: #475569;
-    --text-light: #64748b;
-    --text-white: #ffffff;
+    --border-color: #333333;
+    --border-subtle: #999999;
     
-    --border-color: #cbd5e1;
-    --border-subtle: #e2e8f0;
+    /* Botões Urna */
+    --btn-corrige: #F05A24;
+    --btn-confirma: #00A859;
+    --btn-branco-bg: #FFFFFF;
+    --btn-branco-border: #000000;
+    --btn-teclas: #1A1A1A;
     
-    --status-deferido-bg: #dcfce7;
-    --status-deferido-text: #166534;
-    --status-indeferido-bg: #fee2e2;
-    --status-indeferido-text: #991b1b;
-    --status-pendente-bg: #fef3c7;
-    --status-pendente-text: #92400e;
+    /* Status */
+    --status-deferido-bg: #d4edda;
+    --status-deferido-text: #155724;
+    --status-indeferido-bg: #f8d7da;
+    --status-indeferido-text: #721c24;
+    --status-pendente-bg: #fff3cd;
+    --status-pendente-text: #856404;
 
-    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
+    /* Tipografia Urna */
+    --font-urna: 'Arial Black', Arial, Helvetica, sans-serif;
+    --font-sans: Arial, Helvetica, sans-serif;
     
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 6px;
+    
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 * {
@@ -49,51 +55,54 @@
 body {
     font-family: var(--font-sans);
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.5;
     color: var(--text-main);
     background-color: var(--bg-page);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Tipografia */
+/* === Tipografia Urna === */
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-main);
-    font-weight: 700;
-    line-height: 1.25;
+    font-family: var(--font-urna);
+    font-weight: 900;
+    line-height: 1.2;
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
 }
 
-h1 { font-size: 1.75rem; }
-h2 { font-size: 1.35rem; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
 h3 { font-size: 1.15rem; }
 
 p { margin-bottom: 1rem; }
 
 a {
-    color: var(--primary);
+    color: var(--text-main);
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-underline-offset: 2px;
 }
 a:hover, a:focus {
-    color: var(--primary-hover);
+    color: var(--btn-corrige);
 }
 
-/* Layout Container */
+/* === Layout Container === */
 .container {
     width: 100%;
-    max-width: 1120px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 1rem;
 }
 
-/* Header & Nav */
+/* === Header Urna === */
 .site-header {
-    background-color: var(--primary);
+    background-color: var(--btn-teclas);
     color: var(--text-white);
-    padding: 0.75rem 0;
-    box-shadow: var(--shadow-md);
+    padding: 0;
+    border-bottom: 4px solid var(--btn-confirma);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -104,282 +113,325 @@ a:hover, a:focus {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
 }
 
 .brand-link {
     color: var(--text-white);
     text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 800;
+    font-family: var(--font-urna);
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 .brand-badge {
-    background-color: #2563eb;
+    background-color: var(--btn-confirma);
     color: #ffffff;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 2px 6px;
+    font-size: 0.7rem;
+    font-weight: 900;
+    padding: 3px 8px;
     border-radius: var(--radius-sm);
+    text-transform: uppercase;
 }
 
 .main-nav {
     display: flex;
-    gap: 1rem;
+    gap: 0.25rem;
     align-items: center;
     flex-wrap: wrap;
 }
 .main-nav a {
-    color: #e2e8f0;
+    color: #cccccc;
     text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.4rem 0.6rem;
     border-radius: var(--radius-sm);
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.15s, color 0.15s;
+    letter-spacing: 0.5px;
 }
 .main-nav a:hover, .main-nav a:focus, .main-nav a.active {
     color: var(--text-white);
     background-color: rgba(255, 255, 255, 0.15);
 }
 .nav-cola-btn {
-    background-color: #f59e0b !important;
-    color: #0f172a !important;
-    font-weight: 700 !important;
-    border-radius: var(--radius-md) !important;
-    padding: 0.35rem 0.75rem !important;
+    background-color: var(--btn-corrige) !important;
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 0.4rem 0.8rem !important;
 }
 
-/* Aviso de Neutralidade Obrigatório */
+/* === Aviso de Neutralidade === */
 .neutrality-banner {
-    background-color: #f1f5f9;
-    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    border-bottom: 2px solid var(--border-color);
     padding: 0.5rem 0;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 .neutrality-banner strong {
     color: var(--text-main);
+    font-weight: 900;
 }
 
-/* Conteúdo Principal */
+/* === Conteúdo Principal === */
 .main-content {
     flex: 1;
-    padding: 1.5rem 0 3rem 0;
+    padding: 1.5rem 0 2rem 0;
 }
 
-/* Cards & Seções */
+/* === Cards Urna === */
 .card {
     background-color: var(--bg-card);
-    border: 1px solid var(--border-subtle);
+    border: 2px solid var(--border-color);
     border-radius: var(--radius-md);
     padding: 1.25rem;
     margin-bottom: 1.25rem;
-    box-shadow: var(--shadow-sm);
 }
 
-/* Hero Section */
+/* === Hero Section Urna === */
 .hero {
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    background: var(--btn-teclas);
     color: var(--text-white);
-    padding: 2.5rem 1.5rem;
-    border-radius: var(--radius-lg);
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow-md);
-}
-.hero h1 { color: #ffffff; margin-bottom: 0.75rem; }
-.hero p { color: #e2e8f0; font-size: 1.1rem; max-width: 750px; }
-
-/* Grid de Cargos */
-.offices-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0;
-}
-.office-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
+    padding: 2rem 1.5rem;
     border-radius: var(--radius-md);
-    padding: 1.25rem;
-    text-align: center;
-    text-decoration: none;
-    color: var(--text-main);
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-    display: block;
-}
-.office-card:hover, .office-card:focus {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary);
-    color: var(--primary);
-}
-.office-card h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
-.office-card span { font-size: 0.85rem; color: var(--text-muted); }
-
-/* Formulário de Busca e Filtros */
-.filters-bar {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1.25rem;
     margin-bottom: 1.5rem;
-    box-shadow: var(--shadow-sm);
+    border: 3px solid var(--border-color);
+    border-bottom: 6px solid var(--btn-confirma);
 }
-.filters-form {
+.hero h1 { 
+    color: #ffffff; 
+    margin-bottom: 0.75rem;
+    font-size: 1.75rem;
+}
+.hero p { 
+    color: #cccccc; 
+    font-size: 1rem; 
+    max-width: 700px; 
+    text-transform: none;
+}
+
+/* === Grid de Cargos Urna === */
+.offices-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 0.75rem;
+    margin: 1rem 0;
+}
+.office-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-main);
+    display: block;
+    transition: background-color 0.15s, border-color 0.15s;
+}
+.office-card:hover, .office-card:focus {
+    background-color: var(--btn-teclas);
+    border-color: var(--btn-teclas);
+    color: var(--text-white);
+}
+.office-card h3 { 
+    font-size: 1rem; 
+    margin-bottom: 0.25rem;
+}
+.office-card span { 
+    font-size: 0.8rem; 
+    color: var(--text-light);
+    text-transform: uppercase;
+}
+.office-card:hover span { color: #cccccc; }
+
+/* === Formulário de Busca === */
+.filters-bar {
+    background-color: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+}
+.filters-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.6rem;
     align-items: flex-end;
 }
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.2rem;
 }
 .form-group label {
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 700;
     color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 .form-control {
-    font-family: inherit;
-    font-size: 0.95rem;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--border-color);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    padding: 0.45rem 0.6rem;
+    border: 2px solid var(--border-color);
     border-radius: var(--radius-sm);
     background-color: #ffffff;
     color: var(--text-main);
 }
 .form-control:focus {
-    outline: 2px solid var(--primary);
+    outline: 3px solid var(--btn-corrige);
     outline-offset: 1px;
 }
 
-/* Botões */
+/* === Botões Urna === */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem;
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 0.55rem 1rem;
+    gap: 0.3rem;
+    font-family: var(--font-urna);
+    font-size: 0.85rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 1rem;
     border-radius: var(--radius-sm);
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     cursor: pointer;
     text-decoration: none;
-    transition: background-color 0.2s, border-color 0.2s;
+    transition: background-color 0.15s, border-color 0.15s;
 }
 .btn-primary {
-    background-color: var(--primary);
+    background-color: var(--btn-teclas);
     color: #ffffff;
+    border-color: var(--btn-teclas);
 }
 .btn-primary:hover, .btn-primary:focus {
-    background-color: var(--primary-hover);
+    background-color: #333333;
     color: #ffffff;
 }
 .btn-secondary {
-    background-color: var(--bg-alt);
+    background-color: var(--btn-branco-bg);
     color: var(--text-main);
     border-color: var(--border-color);
 }
 .btn-secondary:hover, .btn-secondary:focus {
-    background-color: var(--border-color);
+    background-color: var(--bg-card);
 }
 .btn-accent {
-    background-color: var(--accent);
+    background-color: var(--btn-confirma);
     color: #ffffff;
+    border-color: var(--btn-confirma);
 }
 .btn-accent:hover, .btn-accent:focus {
-    background-color: #b45309;
+    background-color: #008a49;
+}
+.btn-corrige {
+    background-color: var(--btn-corrige);
+    color: #ffffff;
+    border-color: var(--btn-corrige);
+}
+.btn-corrige:hover, .btn-corrige:focus {
+    background-color: #d44a1a;
 }
 .btn-sm {
-    font-size: 0.85rem;
-    padding: 0.35rem 0.65rem;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
 }
 
-/* Lista de Candidatos */
+/* === Lista de Candidatos Urna === */
 .candidates-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
 }
 .candidate-card {
     background-color: var(--bg-card);
-    border: 1px solid var(--border-subtle);
+    border: 2px solid var(--border-color);
     border-radius: var(--radius-md);
-    padding: 1.25rem;
-    box-shadow: var(--shadow-sm);
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: box-shadow 0.2s;
+    transition: border-color 0.15s;
 }
 .candidate-card:hover {
-    box-shadow: var(--shadow-md);
+    border-color: var(--btn-teclas);
 }
 .candidate-header {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 0.75rem;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 .candidate-photo {
-    width: 68px;
-    height: 85px;
+    width: 72px;
+    height: 96px;
     border-radius: var(--radius-sm);
     object-fit: cover;
-    background-color: var(--bg-alt);
-    border: 1px solid var(--border-subtle);
+    background-color: #ffffff;
+    border: 2px solid var(--border-color);
+    flex-shrink: 0;
 }
 .candidate-info {
     flex: 1;
+    min-width: 0;
 }
 .candidate-ballot-name {
-    font-size: 1.15rem;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 0.2rem;
+    font-size: 1.1rem;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 0.15rem;
+    text-transform: uppercase;
 }
 .candidate-full-name {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
 }
 .candidate-number-badge {
     display: inline-block;
-    background-color: var(--bg-alt);
-    border: 1px solid var(--border-color);
-    font-size: 1.1rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    color: var(--primary);
-    padding: 2px 8px;
+    background-color: var(--btn-teclas);
+    border: 2px solid var(--btn-teclas);
+    font-family: var(--font-urna);
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--text-white);
+    padding: 2px 10px;
     border-radius: var(--radius-sm);
 }
 
 .candidate-meta {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     margin: 0.5rem 0;
-    border-top: 1px solid var(--border-subtle);
+    border-top: 2px solid var(--border-color);
     padding-top: 0.5rem;
+    text-transform: uppercase;
 }
 .candidate-meta p {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
 }
 
-/* Badges de Status */
+/* === Badges de Status === */
 .status-badge {
     display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.7rem;
+    font-weight: 900;
     padding: 2px 8px;
-    border-radius: 9999px;
+    border-radius: var(--radius-sm);
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 .status-deferido {
     background-color: var(--status-deferido-bg);
@@ -394,87 +446,87 @@ a:hover, a:focus {
     color: var(--status-pendente-text);
 }
 
-/* Paginação */
+/* === Paginação === */
 .pagination {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
+    gap: 0.3rem;
+    margin-top: 1.5rem;
     flex-wrap: wrap;
 }
 .pagination a, .pagination span {
-    padding: 0.4rem 0.8rem;
-    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.7rem;
+    border: 2px solid var(--border-color);
     border-radius: var(--radius-sm);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 700;
     color: var(--text-main);
     background-color: #ffffff;
 }
 .pagination .active {
-    background-color: var(--primary);
+    background-color: var(--btn-teclas);
     color: #ffffff;
-    border-color: var(--primary);
-    font-weight: 700;
+    border-color: var(--btn-teclas);
 }
 
-/* Ficha do Candidato (Detalhes) */
+/* === Ficha do Candidato (Detalhes) === */
 .candidate-detail-header {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.25rem;
     flex-wrap: wrap;
-    background: #ffffff;
-    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
     border-radius: var(--radius-md);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: var(--shadow-sm);
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
 }
 .candidate-detail-photo {
     width: 140px;
-    height: 180px;
-    border-radius: var(--radius-md);
+    height: 187px;
+    border-radius: var(--radius-sm);
     object-fit: cover;
-    border: 1px solid var(--border-color);
-    background-color: var(--bg-alt);
+    border: 3px solid var(--border-color);
+    background-color: #ffffff;
 }
 .candidate-detail-title {
     flex: 1;
 }
 
-/* Fonte Auditável */
+/* === Fonte Auditável === */
 .source-box {
-    background-color: #f8fafc;
-    border-left: 4px solid var(--secondary);
-    padding: 0.75rem 1rem;
-    font-size: 0.85rem;
+    background-color: #ffffff;
+    border-left: 4px solid var(--btn-teclas);
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--btn-teclas);
 }
 .source-box a {
-    color: var(--secondary);
-    font-weight: 600;
+    color: var(--btn-teclas);
+    font-weight: 700;
 }
 
-/* Cola Eleitoral */
+/* === Cola Eleitoral Urna === */
 .checklist-container {
-    background: #ffffff;
-    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
     border-radius: var(--radius-md);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-sm);
+    padding: 1.25rem;
 }
 .checklist-slot {
-    border: 1px dashed var(--border-color);
+    border: 2px dashed var(--border-color);
     border-radius: var(--radius-md);
     padding: 0.75rem;
     margin-bottom: 0.75rem;
-    background-color: #fafafa;
+    background-color: #ffffff;
 }
 .checklist-slot.filled {
     border-style: solid;
-    border-color: var(--border-color);
-    background-color: #ffffff;
+    border-color: var(--btn-confirma);
+    background-color: #f0fff4;
 }
 .checklist-slot-header {
     display: flex;
@@ -485,14 +537,15 @@ a:hover, a:focus {
 .checklist-notes {
     width: 100%;
     margin-top: 0.4rem;
-    font-family: inherit;
+    font-family: var(--font-sans);
     font-size: 0.8rem;
     padding: 0.35rem;
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--border-color);
     border-radius: var(--radius-sm);
+    text-transform: uppercase;
 }
 
-/* Foto na Cola Eleitoral */
+/* === Foto na Cola Eleitoral === */
 .cola-candidate-row {
     display: flex;
     gap: 0.75rem;
@@ -500,11 +553,11 @@ a:hover, a:focus {
 }
 .cola-photo {
     width: 50px;
-    height: 63px;
+    height: 67px;
     border-radius: var(--radius-sm);
     object-fit: cover;
-    border: 1px solid var(--border-subtle);
-    background-color: var(--bg-alt);
+    border: 2px solid var(--border-color);
+    background-color: #ffffff;
     flex-shrink: 0;
 }
 .cola-candidate-info {
@@ -512,16 +565,17 @@ a:hover, a:focus {
     min-width: 0;
 }
 
-/* Footer */
+/* === Footer Urna === */
 .site-footer {
-    background-color: #0f172a;
-    color: #94a3b8;
-    padding: 2.5rem 0 1.5rem 0;
-    font-size: 0.9rem;
+    background-color: var(--btn-teclas);
+    color: #999999;
+    padding: 2rem 0 1rem 0;
+    font-size: 0.85rem;
     margin-top: auto;
+    border-top: 4px solid var(--btn-confirma);
 }
 .site-footer a {
-    color: #cbd5e1;
+    color: #cccccc;
 }
 .site-footer a:hover {
     color: #ffffff;
@@ -533,11 +587,67 @@ a:hover, a:focus {
     margin-bottom: 1.5rem;
 }
 
-/* Regras de Impressão (@media print) - Otimizado para 1 folha */
+/* === Botão Virtual Urna (Teclado) === */
+.btn-urna {
+    font-family: var(--font-urna);
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    border: none;
+    letter-spacing: 1px;
+}
+.btn-urna-branco {
+    background-color: var(--btn-branco-bg);
+    color: var(--text-main);
+    border: 3px solid var(--btn-branco-border);
+}
+.btn-urna-corrige {
+    background-color: var(--btn-corrige);
+    color: #ffffff;
+}
+.btn-urna-confirma {
+    background-color: var(--btn-confirma);
+    color: #ffffff;
+    padding: 12px 28px;
+}
+
+/* === Caixa de Dígito Urna === */
+.urna-digito-box {
+    width: 60px;
+    height: 80px;
+    border: 3px solid var(--text-main);
+    font-family: var(--font-urna);
+    font-size: 48px;
+    line-height: 80px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 8px;
+    background-color: #ffffff;
+}
+
+/* === Rodapé de Instruções Urna === */
+.urna-footer-instructions {
+    border-top: 3px solid var(--text-main);
+    padding-top: 1rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    font-family: var(--font-urna);
+    text-transform: uppercase;
+}
+.urna-footer-instructions p {
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+.urna-footer-instructions .verde { color: var(--btn-confirma); font-weight: 900; }
+.urna-footer-instructions .laranja { color: var(--btn-corrige); font-weight: 900; }
+
+/* === Regras de Impressão (@media print) === */
 @media print {
     @page {
         size: A4;
-        margin: 12mm 10mm 10mm 10mm;
+        margin: 10mm 8mm 8mm 8mm;
     }
     .site-header, .site-footer, .neutrality-banner, .btn, .no-print {
         display: none !important;
@@ -545,8 +655,8 @@ a:hover, a:focus {
     body {
         background-color: #ffffff;
         color: #000000;
-        font-size: 9pt;
-        line-height: 1.3;
+        font-size: 8pt;
+        line-height: 1.2;
     }
     .container {
         max-width: 100%;
@@ -561,51 +671,55 @@ a:hover, a:focus {
 
     /* Cargos - compacto */
     .checklist-slot {
-        border: 1px solid #333 !important;
+        border: 2px solid #000 !important;
         background-color: #ffffff !important;
         page-break-inside: avoid;
-        padding: 0.4rem 0.6rem;
-        margin-bottom: 0.4rem;
+        padding: 0.3rem 0.5rem;
+        margin-bottom: 0.3rem;
+    }
+    .checklist-slot.filled {
+        background-color: #f0f0f0 !important;
     }
     .checklist-slot-header h3 {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         margin: 0;
     }
     .checklist-slot-header span {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
     }
 
     /* Foto na impressão */
     .cola-photo {
-        width: 36px;
-        height: 45px;
-        border: 1px solid #999;
+        width: 32px;
+        height: 43px;
+        border: 1px solid #000;
     }
 
     /* Candidato - compacto */
     .cola-candidate-row {
-        gap: 0.5rem;
+        gap: 0.4rem;
     }
     .cola-candidate-info h4 {
-        font-size: 0.9rem !important;
-    }
-    .cola-candidate-info span {
         font-size: 0.8rem !important;
     }
+    .cola-candidate-info span {
+        font-size: 0.7rem !important;
+    }
     .candidate-number-badge {
-        font-size: 0.85rem !important;
-        padding: 1px 5px !important;
+        font-size: 0.8rem !important;
+        padding: 1px 4px !important;
+        border: 1px solid #000 !important;
     }
 
     /* Notas - compactas */
     .checklist-notes {
-        font-size: 0.7rem;
-        padding: 0.2rem;
-        border: 1px solid #ccc;
-        min-height: 1.2em;
+        font-size: 0.65rem;
+        padding: 0.15rem;
+        border: 1px solid #000;
+        min-height: 1em;
     }
 
-    /* Remover botões e links de busca */
+    /* Remover botões e links */
     .btn-remove-slot, .checklist-slot a {
         display: none !important;
     }
@@ -613,24 +727,23 @@ a:hover, a:focus {
     /* Cards sem sombra */
     .card {
         box-shadow: none;
-        border: 1px solid #ddd;
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
+        border: 1px solid #000;
+        padding: 0.4rem;
+        margin-bottom: 0.4rem;
     }
 
     /* Títulos menores */
-    h1 { font-size: 1.1rem; margin-bottom: 0.3rem; }
-    h2 { font-size: 0.95rem; }
-    h3 { font-size: 0.85rem; }
-    p { margin-bottom: 0.3rem; }
+    h1 { font-size: 1rem; margin-bottom: 0.2rem; }
+    h2 { font-size: 0.85rem; }
+    h3 { font-size: 0.75rem; }
+    p { margin-bottom: 0.2rem; }
 
     /* Aviso compacto */
     .checklist-slot + .card {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.5rem;
+        font-size: 0.7rem;
+        padding: 0.25rem 0.4rem;
     }
 }
 .print-only {
     display: none;
 }
-

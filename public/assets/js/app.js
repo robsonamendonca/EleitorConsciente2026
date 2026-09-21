@@ -1,5 +1,6 @@
 /**
  * Lógica principal da interface Web do Eleitor Consciente 2026
+ * Design System: Urna Eletrônica Brasileira
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -77,15 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="cola-candidate-info">
                                 <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.5rem;">
                                     <div>
-                                        <h4 style="margin:0; font-size:1.05rem; color:#1e3a8a;">${escapeHtml(cand.ballot_name)}</h4>
-                                        <span style="font-size:0.85rem; color:#475569;">${escapeHtml(cand.party_acronym)}</span>
+                                        <h4 style="margin:0; font-size:1.05rem; color:#000000; text-transform:uppercase;">${escapeHtml(cand.ballot_name)}</h4>
+                                        <span style="font-size:0.8rem; color:#333333; text-transform:uppercase; font-weight:700;">${escapeHtml(cand.party_acronym)}</span>
                                     </div>
                                     <span class="candidate-number-badge">${escapeHtml(cand.ballot_number)}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="no-print" style="margin-top:0.5rem;">
-                            <button class="btn btn-sm btn-secondary btn-remove-slot" data-office-code="${code}">✕ Remover</button>
+                        <div class="no-print" style="margin-top:0.4rem;">
+                            <button class="btn btn-sm btn-corrige btn-remove-slot" data-office-code="${code}">✕ Remover</button>
                         </div>
                     `;
                     if (noteInput) {
@@ -94,10 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 } else {
                     slot.classList.remove('filled');
-                    // Para senadores, mostra mensagem diferente
                     const baseOffice = slot.getAttribute('data-base-office') || code;
                     contentDiv.innerHTML = `
-                        <p style="color:#64748b; font-style:italic; margin-bottom:0.5rem;">Nenhum candidato selecionado.</p>
+                        <p style="color:#555555; font-style:italic; margin-bottom:0.4rem; text-transform:uppercase; font-size:0.85rem;">Nenhum candidato selecionado.</p>
                         <a href="/candidatos?office=${encodeURIComponent(baseOffice)}" class="btn btn-sm btn-secondary no-print">+ Buscar Candidatos</a>
                     `;
                     if (noteInput) {
