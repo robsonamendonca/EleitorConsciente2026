@@ -1,32 +1,79 @@
-# Ambientes e Segredos
+# =============================================================================
+# Eleitor Consciente 2026 - .gitignore
+# =============================================================================
+
+# === Variaveis de Ambiente (CREDENCIAIS) ===
 .env
-.env.backup
+.env.local
 .env.*.local
+.env.backup
 
-# Dependências do Composer
+# === Dependencias ===
 /vendor/
+/node_modules/
 
-# Cache e testes
+# === Cache e Testes ===
 /.phpunit.cache/
 /tests/.phpunit.cache/
 .phpunit.result.cache
+composer.lock
 
-# Logs e Armazenamento temporário
+# === Logs ===
 /storage/logs/*.log
+*.log
+
+# === Armazenamento Temporario ===
 /storage/cache/*
 /storage/imports/*
 
-# Arquivos do Sistema Operacional / IDE
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/
-*.swp
-
-# Fotos dos candidatos (arquivos grandes baixados do TSE)
+# === Fotos dos Candidatos (arquivos grandes) ===
 /database/foto_cand*/
 
-# Symlinks das fotos (criados pelo entrypoint)
+# === Symlinks das fotos ===
 /public/fotos
 /public/fotos_br
 
+# === Dump do Banco (gerado por scripts) ===
+/build/eleitor_consciente_dump.sql
+
+# === Arquivos do Sistema Operacional ===
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# === IDEs e Editores ===
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.project
+.settings/
+.classpath
+*.iml
+
+# === Docker (ambiente local) ===
+docker-compose.override.yml
+
+# === Backup local ===
+*.sql.gz
+*.sql.bak
+
+# === Chaves SSH e Certificados ===
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+
+# === Outros ===
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env.development.local
+.env.test.local
+.env.production.local

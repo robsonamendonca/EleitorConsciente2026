@@ -1,0 +1,55 @@
+services:
+  php:
+    image: php:8.2-apache
+    build:
+      context: ..
+      dockerfile: build/Dockerfile
+    container_name: eleitor_php
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
+    volumes:
+      - ../:/var/www/html
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/uploads.ini
+    environment:
+      - APP_ENV=${APP_ENV:-production}
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=${DB_DATABASE:-eleitor_consciente}
+      - DB_USERNAME=${DB_USERNAME:-eleitor_user}
+      - DB_PASSWORD=${DB_PASSWORD:-eleitor_pass}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - eleitor-net
+
+  mysql:
+    image: mysql:8.0
+    container_name: eleitor_mysql
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_DATABASE:-eleitor_consciente}
+      MYSQL_USER: ${DB_USERNAME:-eleitor_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-eleitor_pass}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/custom.cnf
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-root}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - eleitor-net
+
+networks:
+  eleitor-net:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local

@@ -28,7 +28,7 @@ RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/Allo
 RUN mkdir -p /var/www/html/public/fotos /var/www/html/public/fotos_br
 
 # Entrypoint para symlinks
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY build/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /var/www/html

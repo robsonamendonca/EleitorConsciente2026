@@ -4,10 +4,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PHP](https://img.shields.io/badge/PHP-8.2-blue.svg)](https://www.php.net/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-orange.svg)](https://www.mysql.com/)
+[![Security](https://img.shields.io/badge/Security-LGPD%20Compliant-green.svg)](SECURITY.md)
+[![Contributions](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-Plataforma pública, aberta, acessível e neutra para consulta e organização eleitoral, com foco inicial no estado de São Paulo nas **Eleições Gerais de 2026**.
+> **Plataforma publica, aberta, acessivel e neutra para consulta e organizacao eleitoral, com foco inicial no estado de Sao Paulo nas Eleicoes Gerais de 2026.**
 
-O objetivo do projeto é permitir que qualquer cidadão consulte dados oficiais e transparentes sobre candidatos a partir de fontes públicas primárias (Tribunal Superior Eleitoral - TSE / DivulgaCandContas), organize sua própria "cola eleitoral" privada e registre critérios de análise pessoal sem qualquer interferência, ranking político ou recomendação de voto.
+O Eleitor Consciente resolve o problema de **acesso fragmentado e desinformativo** as informacoes eleitorais. Fornecemos dados oficiais do TSE de forma clara, neutra e auditavel, permitindo que cada eleitor tome decisoes informadas sem interferencia politica ou algoritmos de recomendacao.
 
 ---
 
@@ -17,6 +19,33 @@ O objetivo do projeto é permitir que qualquer cidadão consulte dados oficiais 
 2. **Transparência e Auditabilidade:** Todo candidato possui suas fontes governamentais e datas de coleta informadas. O importador calcula hashes SHA-256 e audita cada registro inserido, atualizado ou rejeitado.
 3. **Privacidade por Padrão (LGPD):** Não solicitamos login, CPF ou dados pessoais. A "Cola Eleitoral" opera **100% no navegador (`localStorage`)** do usuário e nunca trafega nem é armazenada no servidor.
 4. **Acessibilidade e Desempenho:** Interface mobile-first desenvolvida em HTML5 semântico, CSS3 moderno e Vanilla JavaScript, sem dependência de frameworks pesados.
+
+---
+
+## 🛡️ Seguranca e Privacidade
+
+| Medida | Status |
+|--------|--------|
+| **Dados Pessoais** | Nao coletamos nome, CPF, email ou dados sensiveis |
+| **Cola Eleitoral** | 100% local (localStorage), nunca trafega pela internet |
+| **Credenciais** | Variaveis de ambiente, nunca hardcoded no codigo |
+| **Historico Git** | Arquivos sensivel no .gitignore, sem secrets commitados |
+| **Headers HTTP** | CSP, X-Frame-Options, X-XSS-Protection habilitados |
+| **SQL Injection** | Prepared statements em todas as queries |
+| **XSS** | Escape de saida HTML em todas as exibicoes |
+| **Auditoria** | Hash SHA-256 em cada lote de dados importados |
+| **Backup** | Automatizado com retencao configuravel |
+| **LGPD** | 100% conforme - leia [SECURITY.md](SECURITY.md) |
+
+### Gerar Chaves Seguras
+
+```bash
+# Gerar chave de administracao
+openssl rand -hex 32
+
+# Gerar senha forte para banco
+openssl rand -base64 24
+```
 
 ---
 
@@ -498,3 +527,15 @@ docker compose down -v --rmi all
 ## 📄 Licença
 
 Este projeto é software livre licenciado sob a [Licença MIT](LICENSE).
+
+## 🤝 Contribuições
+
+Consulte nosso [Guia de Contribuição](CONTRIBUTING.md) e [Código de Conduta](CODE_OF_CONDUCT.md).
+
+## 🔒 Segurança
+
+Para reportar vulnerabilidades, consulte nossa [Política de Segurança](SECURITY.md).
+
+---
+
+**Feito com ❤️ para a democracia brasileira.**
